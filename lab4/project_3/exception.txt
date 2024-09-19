@@ -1,0 +1,31 @@
+addi x1,x0,1
+addi x2,x0,1
+add x3,x2,x1
+
+add x1,x2,x3
+add x2,x1,x3
+add x3,x2,x1
+ecall
+add x1,x2,x3
+add x2,x1,x3
+add x3,x2,x1
+#INT
+003100B3 add x1,x2,x3
+00308133 add x2,x1,x3
+001101B3 add x3,x2,x1
+FFFFFFFF add x0,x0,x0 #ill inst
+003100B3 add x1,x2,x3
+00308133 add x2,x1,x3
+001101B3 add x3,x2,x1
+
+csrrs x31,0x300,x0 # MSTATUS
+csrrs x30,0x341,x0 # MEPC
+csrrs x29,0x342,x0 # MCAUSE
+csrrs x28,0x343,x0 # MTVAL
+csrrs x27,0x305,x0 # MTVEC
+li x26,0x8000000b
+li x26,0x8000000b
+beq x26,x29,else
+addi x30,x30,4 #EPC
+else: 
+csrrw x0,0x305,x30 # MEPC=MEPC+4

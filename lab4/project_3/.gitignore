@@ -1,0 +1,8 @@
+.Xil/*
+project_3.cache/*
+project_3.gen/*
+project_3.hw/*
+project_3.runs/*
+*.jou
+*.log
+*.str
